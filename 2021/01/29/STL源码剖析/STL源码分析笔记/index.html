@@ -4,27 +4,27 @@
   <meta charset="utf-8">
   
   
-  <title>NIHAO | Hexo</title>
+  <title>STL源码分析笔记 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="C++size_tsize_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围 1static size_t callback(void *ptr, size_t size, size_t nmemb, void *stream)   ::operator  new 与 new 区别12int *nums &#x3D; (int*)::opeartor new (sizeof(int) *">
+  <meta name="description" content="C++size_tsize_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围 1static size_t callback(void *ptr, size_t size, size_t nmemb, void *stream)   ::operator  new 与 new 区别12int *nums &#x3D; (int*)::opeartor new (sizeof(int) * 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NIHAO">
+<meta property="og:title" content="STL源码分析笔记">
 <meta property="og:url" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="C++size_tsize_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围 1static size_t callback(void *ptr, size_t size, size_t nmemb, void *stream)   ::operator  new 与 new 区别12int *nums &#x3D; (int*)::opeartor new (sizeof(int) *">
+<meta property="og:description" content="C++size_tsize_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围 1static size_t callback(void *ptr, size_t size, size_t nmemb, void *stream)   ::operator  new 与 new 区别12int *nums &#x3D; (int*)::opeartor new (sizeof(int) * 1">
 <meta property="og:locale">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210129175116221.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210131121259590.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210131165451205.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210216183157435.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210217100423856.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210319162334313.png">
-<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210319162643384.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210129175116221.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131121259590.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131165451205.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210216183157435.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210217100423856.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162334313.png">
+<meta property="og:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162643384.png">
 <meta property="article:published_time" content="2021-01-29T09:38:02.034Z">
-<meta property="article:modified_time" content="2021-03-24T13:02:32.953Z">
+<meta property="article:modified_time" content="2021-03-25T08:29:21.323Z">
 <meta property="article:author" content="chenyuanzhen">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210129175116221.png">
+<meta name="twitter:image" content="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210129175116221.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -211,7 +211,7 @@ mjx-container[display="true"] + br {
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      NIHAO
+      STL源码分析笔记
     </h1>
   
 
@@ -219,8 +219,7 @@ mjx-container[display="true"] + br {
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><mjx-container class="MathJax" jax="SVG" display="true"><svg style="vertical-align: -1.602ex" xmlns="http://www.w3.org/2000/svg" width="4.389ex" height="4.663ex" role="img" focusable="false" viewBox="0 -1353 1940 2061"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g data-mml-node="math"><g data-mml-node="mfrac"><g data-mml-node="mn" transform="translate(220, 676)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500, 0)"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(1000, 0)"></path></g><g data-mml-node="mn" transform="translate(220, -686)"><path data-c="35" d="M164 157Q164 133 148 117T109 101H102Q148 22 224 22Q294 22 326 82Q345 115 345 210Q345 313 318 349Q292 382 260 382H254Q176 382 136 314Q132 307 129 306T114 304Q97 304 95 310Q93 314 93 485V614Q93 664 98 664Q100 666 102 666Q103 666 123 658T178 642T253 634Q324 634 389 662Q397 666 402 666Q410 666 410 648V635Q328 538 205 538Q174 538 149 544L139 546V374Q158 388 169 396T205 412T256 420Q337 420 393 355T449 201Q449 109 385 44T229 -22Q148 -22 99 32T50 154Q50 178 61 192T84 210T107 214Q132 214 148 197T164 157Z"></path><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z" transform="translate(500, 0)"></path><path data-c="34" d="M462 0Q444 3 333 3Q217 3 199 0H190V46H221Q241 46 248 46T265 48T279 53T286 61Q287 63 287 115V165H28V211L179 442Q332 674 334 675Q336 677 355 677H373L379 671V211H471V165H379V114Q379 73 379 66T385 54Q393 47 442 46H471V0H462ZM293 211V545L74 212L183 211H293Z" transform="translate(1000, 0)"></path></g><rect width="1700" height="60" x="120" y="220"></rect></g></g></g></svg></mjx-container></p>
-<h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="size-t"><a href="#size-t" class="headerlink" title="size_t"></a>size_t</h2><p>size_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围</p>
+        <h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="size-t"><a href="#size-t" class="headerlink" title="size_t"></a>size_t</h2><p>size_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">size_t</span> <span class="title">callback</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, <span class="keyword">void</span> *stream)</span> </span></span><br></pre></td></tr></table></figure>
 
 <h2 id="operator-new-与-new-区别"><a href="#operator-new-与-new-区别" class="headerlink" title="::operator  new 与 new 区别"></a>::operator  new 与 new 区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *nums = (<span class="keyword">int</span>*)::opeartor <span class="built_in"><span class="keyword">new</span></span> (<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) * <span class="number">10</span>); <span class="comment">// 表明使用全局域global中的new</span></span><br><span class="line"><span class="keyword">int</span> *nums = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] <span class="comment">// 优先使用的是类中重载的new</span></span><br></pre></td></tr></table></figure>
@@ -236,7 +235,8 @@ mjx-container[display="true"] + br {
 <li>配接器      接口  例子: STL中的queue和stack, 都借助deque实现</li>
 <li>配置器      负责空间配置和管理</li>
 </ol>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210129175116221.png" alt="image-20210129175116221"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210129175116221.png" class="" title="image-20210129175116221">
+
 <h2 id="allocator空间配置器"><a href="#allocator空间配置器" class="headerlink" title="allocator空间配置器"></a>allocator空间配置器</h2><p>可向内存或者硬盘取空间</p>
 <p>new 包含两个阶段</p>
 <ol>
@@ -251,10 +251,12 @@ mjx-container[display="true"] + br {
 <p>destory() 函数:</p>
 <p>在析构一个对象时, 直接调用其析构函数. 但若是析构<strong>一个列表</strong>时, 则会判断析构函数是否<strong>无关紧要</strong>, 如果重要才会一个个调用.</p>
 <h3 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h3><p>为防止产生大量的内存碎片, SGI(STL一个版本)中采用双层配置器, 第一级是<strong>直接使用malloc与free( 当配置区块大于128bytes时 )</strong>. 第二级则采用内存池,  ==__USE_MALLOC==若被未定义则表明采用开放第一级和第二级配置器</p>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210131121259590.png" alt="image-20210131121259590"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131121259590.png" class="" title="image-20210131121259590">
+
 <h4 id="第一级分配方式"><a href="#第一级分配方式" class="headerlink" title="第一级分配方式"></a>第一级分配方式</h4><p>直接调用 malloc 与 free 或者 ::operator new等…</p>
 <h4 id="第二级分配方式"><a href="#第二级分配方式" class="headerlink" title="第二级分配方式"></a>第二级分配方式</h4><p>内存池, 采用的是链表来分配低于128bytes的空间</p>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210131165451205.png" alt="image-20210131165451205"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131165451205.png" class="" title="image-20210131165451205">
+
 <p>分配时, 会检查freeList中哪一块是空闲的,空闲则分配. </p>
 <p>如果freeList满了, 则调用内存分配函数进行扩容, 实现机制会想尽一切办法找到空间, 若真的没有空间则报错.</p>
 <h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>iterators 负责将数据容器和算法撮合起来的粘合剂.<br>迭代器与智能指针很像. 主要重载 * 与 -&gt;.<br>每一个STL容器都有提供专属的迭代器</p>
@@ -266,7 +268,10 @@ mjx-container[display="true"] + br {
 
 
 
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210216183157435.png" alt="image-20210216183157435"></p>
+<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210216183157435.png" class="" title="image-20210216183157435">
+
+
+
 <h3 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h3><p>其中所有元素都是可序的,但未必有序. </p>
 <h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p>与array的差别是静态空间的, 一旦配置就不能改变. </p>
 <p>empty 与 size的区别</p>
@@ -275,7 +280,8 @@ mjx-container[display="true"] + br {
 <h3 id="vector迭代器"><a href="#vector迭代器" class="headerlink" title="vector迭代器"></a>vector迭代器</h3><p>支持随机存取, Random Access Iterators</p>
 <h3 id="分配空间"><a href="#分配空间" class="headerlink" title="分配空间"></a>分配空间</h3><p>当超过当时容量时, 容量会扩充至当前两倍, 若不够, 则继续扩张( <strong>重新配置, 元素移动, 释放原空间</strong>), 此时指向原vector的所有==迭代器都失效==, ==插入==时迭代器可能会失效</p>
 <h3 id="List迭代器"><a href="#List迭代器" class="headerlink" title="List迭代器"></a>List迭代器</h3><p>插入和接合都不会造成原有的list迭代器失效. 为了满足STL规范<strong>前闭后开</strong>区间. 刻意在环状链表的尾端加上一个<strong>空白节点</strong></p>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210217100423856.png" alt="image-20210217100423856"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210217100423856.png" class="" title="image-20210217100423856">
+
 <p>begin 和 end 仅仅是迭代器. </p>
 <p>list并不是随机存储, 所以不支持 &gt; 与 &lt;  , +=, + 仅支持 ++与 –</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 循环</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> iter = mlist.<span class="built_in">begin</span>(); iter != mlist.<span class="built_in">end</span>(). ++iter){};</span><br><span class="line"><span class="comment">// 寻找, 在mlist中找到元素3的位置</span></span><br><span class="line">iter = <span class="built_in">find</span>(mlist.<span class="built_in">begin</span>(), mlist.<span class="built_in">end</span>(), <span class="number">3</span>);</span><br><span class="line"><span class="comment">// 插入, 将99插入到元素3的位置, 然后位置3的元素全部往后移一位.</span></span><br><span class="line">mlist.<span class="built_in">insert</span>(iter, <span class="number">99</span>);</span><br><span class="line"><span class="comment">// 根据迭代器清楚</span></span><br><span class="line">mlist.<span class="built_in">erase</span>(iter);</span><br><span class="line"><span class="comment">// 根据节点值删除</span></span><br><span class="line">mlist.<span class="built_in">remove</span>(<span class="number">99</span>);</span><br></pre></td></tr></table></figure>
@@ -283,7 +289,8 @@ mjx-container[display="true"] + br {
 <h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p><strong>双向</strong>开口<strong>连续线性</strong>空间, 支持元素插入和删除, <strong>随机迭代器( 与vector迭代器非常不同, 但仍然支持随机访问 )</strong>. 指针执行效率低, 若需要排序, 可将deque中的内容完整复制到vector, 对vector进行排序, 再复制回deque. </p>
 <h4 id="空间分配"><a href="#空间分配" class="headerlink" title="空间分配"></a>空间分配</h4><p>连续空间, 由一段一段的定量连续空间构成, 复杂的迭代器架构代替”重新配置, 复制, 释放”. 为了维持对外是整体连续的, 设计和迭代器操作都较为繁琐且必须由中央( map, 非STL中的map )控制. </p>
 <h4 id="deque中的map"><a href="#deque中的map" class="headerlink" title="deque中的map"></a>deque中的map</h4><p>一小块连续空间, 每个元素都是指针, 指向一块较大的连续线性空间, (缓冲区, deque存储空间的主题).  </p>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210319162334313.png" alt="image-20210319162334313"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162334313.png" class="" title="image-20210319162334313">
+
 <h3 id="deque的迭代器"><a href="#deque的迭代器" class="headerlink" title="deque的迭代器"></a>deque的迭代器</h3><p>deque是分段连续空间, 但对外是==”整体连续”==的, 为了完成该任务operator++ 和 operator–为重要的.  deque的迭代器并不是stl中通用的迭代器. 在遍历元素时, 需要检查是否<strong>跨越缓冲区</strong>如果跨越, 需要更新迭代中, first, last, node</p>
 <p>包含内容:</p>
 <ul>
@@ -292,12 +299,13 @@ mjx-container[display="true"] + br {
 <li>该缓冲区的尾 last</li>
 <li>管控中心, 又名中控器 node</li>
 </ul>
-<p><img src="STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0.assets/image-20210319162643384.png" alt="image-20210319162643384"></p>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162643384.png" class="" title="image-20210319162643384">
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/" data-id="ckmnggxrv00009nfjals14dy6" data-title="NIHAO" class="article-share-link">Teilen</a>
+      <a data-url="https://chenyuanzhen.github.io/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/" data-id="ckmngtgen0002hdfj5d8ob4bl" data-title="STL源码分析笔记" class="article-share-link">Teilen</a>
       
       
       
@@ -307,11 +315,11 @@ mjx-container[display="true"] + br {
     
 <nav id="article-nav">
   
-    <a href="/2021/03/24/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Neuer</strong>
       <div class="article-nav-title">
         
-          Hello World
+          设计竞赛种类笔记
         
       </div>
     </a>
@@ -331,9 +339,23 @@ mjx-container[display="true"] + br {
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -352,15 +374,15 @@ mjx-container[display="true"] + br {
       <ul>
         
           <li>
-            <a href="/2021/03/24/Hello/">Hello</a>
+            <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
           </li>
         
           <li>
-            <a href="/2021/03/24/hello-world/">Hello World</a>
+            <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
           </li>
         
           <li>
-            <a href="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/">NIHAO</a>
+            <a href="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/">STL源码分析笔记</a>
           </li>
         
       </ul>
