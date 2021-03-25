@@ -1,11 +1,4 @@
-<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><title>STL源码分析笔记</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1"><meta name="description" content=""><meta name="keywords" content="计算机科学和技术"><meta name="author" content="chenyuanzhen"><link rel="short icon" href="/images/avatar.png"><link rel="icon" href="/images/avatar.png"><!--[if lt IE 9]>
-<script src="/js/modernizr.js"></script>
-<![endif]-->
-<link rel="stylesheet" href="/css/iconfont.css">
-
-<link rel="stylesheet" href="/css/index.css?v=202103251935.css">
-<link rel="stylesheet" href="/css/info.css?v=202103251935.css">
-<link href="https://cdn.bootcss.com/highlight.js/9.15.9/styles/github.min.css" rel="stylesheet"><!-- hexo injector head_end start -->
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>STL源码分析笔记 | Charles chen's blogs</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
@@ -121,16 +114,14 @@ mjx-container[display="true"] {
 mjx-container[display="true"] + br {
   display: none;
 }
-</style><link rel="alternate" href="/atom.xml" title="Charles chen's blogs" type="application/atom+xml">
-</head><body><header id="header" class="header-navigation"><nav><div class="logo"><a href="https://chenyuanzhen.github.io">Charles chen's blogs</a></div><h2 id="mnavh"><span class="navicon"></span></h2><ul id="starlist"><li><a href="/">首页</a></li><li><a href="/time.html">时间轴</a></li></ul><div class="searchbox"><div id="search_bar" class="search_bar"><input id="keyboard" placeholder="想搜点什么呢.." type="text" name="keyboard" autocomplete="off" class="input"><p class="search_ico"><span></span></p></div></div></nav></header><article><main><div class="con_warp"><div class="infosbox"><div class="newsview"><h3 class="news_title">STL源码分析笔记</h3><div class="bloginfo"><ul><li class="author">作者：<a href="/">chenyuanzhen</a></li><li class="lmname"><a href="/"></a></li><li class="timer">时间：2021-01-29 17:38:02</li><li class="view"><span id="busuanzi_value_page_pv">99</span><span>次访问</span></li></ul></div><div class="tags"></div><div class="news_con"><h1 id="C"><a href="#C" class="headerlink" title="C++"></a>C++</h1><h2 id="size-t"><a href="#size-t" class="headerlink" title="size_t"></a>size_t</h2><p>size_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围</p>
+</style></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Charles chen's blogs</a><span class="subtitle">冲冲冲</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>STL源码分析笔记</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2021-01-29</div></div></div><article><div class="container post"><h1 id="c"><a class="markdownIt-Anchor" href="#c"></a> C++</h1>
+<h2 id="size_t"><a class="markdownIt-Anchor" href="#size_t"></a> size_t</h2>
+<p>size_t表示该平台的编译器下地址线最大范围. 即该平台的最大的数据范围</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">size_t</span> <span class="title">callback</span><span class="params">(<span class="keyword">void</span> *ptr, <span class="keyword">size_t</span> size, <span class="keyword">size_t</span> nmemb, <span class="keyword">void</span> *stream)</span> </span></span><br></pre></td></tr></table></figure>
-
-<h2 id="operator-new-与-new-区别"><a href="#operator-new-与-new-区别" class="headerlink" title="::operator  new 与 new 区别"></a>::operator  new 与 new 区别</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *nums = (<span class="keyword">int</span>*)::opeartor <span class="built_in"><span class="keyword">new</span></span> (<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) * <span class="number">10</span>); <span class="comment">// 表明使用全局域global中的new</span></span><br><span class="line"><span class="keyword">int</span> *nums = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] <span class="comment">// 优先使用的是类中重载的new</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-<h1 id="STL六大组件"><a href="#STL六大组件" class="headerlink" title="STL六大组件"></a>STL六大组件</h1><ol>
+<h2 id="operator-new-与-new-区别"><a class="markdownIt-Anchor" href="#operator-new-与-new-区别"></a> ::operator  new 与 new 区别</h2>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> *nums = (<span class="keyword">int</span>*)::opeartor <span class="built_in"><span class="keyword">new</span></span> (<span class="built_in"><span class="keyword">sizeof</span></span>(<span class="keyword">int</span>) * <span class="number">10</span>); <span class="comment">// 表明使用全局域global中的new</span></span><br><span class="line"><span class="keyword">int</span> *nums = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>] <span class="comment">// 优先使用的是类中重载的new</span></span><br></pre></td></tr></table></figure>
+<h1 id="stl六大组件"><a class="markdownIt-Anchor" href="#stl六大组件"></a> STL六大组件</h1>
+<ol>
 <li>容器          vector, list…</li>
 <li>算法          sort, search</li>
 <li>迭代器      算法中操作容器的工具</li>
@@ -139,8 +130,8 @@ mjx-container[display="true"] + br {
 <li>配置器      负责空间配置和管理</li>
 </ol>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210129175116221.png" class="" title="image-20210129175116221">
-
-<h2 id="allocator空间配置器"><a href="#allocator空间配置器" class="headerlink" title="allocator空间配置器"></a>allocator空间配置器</h2><p>可向内存或者硬盘取空间</p>
+<h2 id="allocator空间配置器"><a class="markdownIt-Anchor" href="#allocator空间配置器"></a> allocator空间配置器</h2>
+<p>可向内存或者硬盘取空间</p>
 <p>new 包含两个阶段</p>
 <ol>
 <li>调用 ::operator new 配置内存                STL   alloc::allocate()负责</li>
@@ -153,48 +144,53 @@ mjx-container[display="true"] + br {
 </ol>
 <p>destory() 函数:</p>
 <p>在析构一个对象时, 直接调用其析构函数. 但若是析构<strong>一个列表</strong>时, 则会判断析构函数是否<strong>无关紧要</strong>, 如果重要才会一个个调用.</p>
-<h3 id="分配内存"><a href="#分配内存" class="headerlink" title="分配内存"></a>分配内存</h3><p>为防止产生大量的内存碎片, SGI(STL一个版本)中采用双层配置器, 第一级是<strong>直接使用malloc与free( 当配置区块大于128bytes时 )</strong>. 第二级则采用内存池,  ==__USE_MALLOC==若被未定义则表明采用开放第一级和第二级配置器</p>
+<h3 id="分配内存"><a class="markdownIt-Anchor" href="#分配内存"></a> 分配内存</h3>
+<p>为防止产生大量的内存碎片, SGI(STL一个版本)中采用双层配置器, 第一级是<strong>直接使用malloc与free( 当配置区块大于128bytes时 )</strong>. 第二级则采用内存池,  <mark>__USE_MALLOC</mark>若被未定义则表明采用开放第一级和第二级配置器</p>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131121259590.png" class="" title="image-20210131121259590">
-
-<h4 id="第一级分配方式"><a href="#第一级分配方式" class="headerlink" title="第一级分配方式"></a>第一级分配方式</h4><p>直接调用 malloc 与 free 或者 ::operator new等…</p>
-<h4 id="第二级分配方式"><a href="#第二级分配方式" class="headerlink" title="第二级分配方式"></a>第二级分配方式</h4><p>内存池, 采用的是链表来分配低于128bytes的空间</p>
+<h4 id="第一级分配方式"><a class="markdownIt-Anchor" href="#第一级分配方式"></a> 第一级分配方式</h4>
+<p>直接调用 malloc 与 free 或者 ::operator new等…</p>
+<h4 id="第二级分配方式"><a class="markdownIt-Anchor" href="#第二级分配方式"></a> 第二级分配方式</h4>
+<p>内存池, 采用的是链表来分配低于128bytes的空间</p>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210131165451205.png" class="" title="image-20210131165451205">
-
-<p>分配时, 会检查freeList中哪一块是空闲的,空闲则分配. </p>
+<p>分配时, 会检查freeList中哪一块是空闲的,空闲则分配.</p>
 <p>如果freeList满了, 则调用内存分配函数进行扩容, 实现机制会想尽一切办法找到空间, 若真的没有空间则报错.</p>
-<h2 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h2><p>iterators 负责将数据容器和算法撮合起来的粘合剂.<br>迭代器与智能指针很像. 主要重载 * 与 -&gt;.<br>每一个STL容器都有提供专属的迭代器</p>
+<h2 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h2>
+<p>iterators 负责将数据容器和算法撮合起来的粘合剂.<br>
+迭代器与智能指针很像. 主要重载 * 与 -&gt;.<br>
+每一个STL容器都有提供专属的迭代器</p>
 <p>需要得知指针指向数据的类型: 需要用到模板的参数推导机制:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>, <span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func_imp1</span><span class="params">(I iter, T t)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  T tmp; <span class="comment">// T 为迭代器所指之物, 根据iter所指向的数据烈性</span></span><br><span class="line">  <span class="comment">// 函数主体...</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">I</span>&gt;</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(I iter)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="built_in">func_imp1</span>(iter, *iter); </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="keyword">int</span> i;</span><br><span class="line">  <span class="built_in">func</span>(&amp;i);</span><br><span class="line">}</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
-
-<h3 id="类型萃取"><a href="#类型萃取" class="headerlink" title="类型萃取"></a>类型萃取</h3><p>模板是迭代器的核心, 因为迭代器需要操作的函数类型是多变的, 需要使用模板获取其类型</p>
+<h3 id="类型萃取"><a class="markdownIt-Anchor" href="#类型萃取"></a> 类型萃取</h3>
+<p>模板是迭代器的核心, 因为迭代器需要操作的函数类型是多变的, 需要使用模板获取其类型</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> _<span class="title">Category</span>, <span class="keyword">class</span> _<span class="title">Tp</span>, <span class="keyword">class</span> _<span class="title">Distance</span> =</span> <span class="keyword">ptrdiff_t</span>,</span><br><span class="line">         <span class="class"><span class="keyword">class</span> _<span class="title">Pointer</span> =</span> _Tp*, <span class="class"><span class="keyword">class</span> _<span class="title">Reference</span> =</span> _Tp&amp;&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">LIBCPP_TEMPLATE_VIS</span> <span class="title">iterator</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">    <span class="comment">// 利用 typedef 类型重命名进行类型萃取</span></span><br><span class="line">    <span class="comment">// value_type 类型 为 _Tp</span></span><br><span class="line">    <span class="comment">// 迭代器所指对象的型别</span></span><br><span class="line">    <span class="keyword">typedef</span> _Tp        value_type;</span><br><span class="line">  	<span class="comment">// 两个迭代器之间的距离</span></span><br><span class="line">    <span class="keyword">typedef</span> _Distance  difference_type;</span><br><span class="line">  	<span class="comment">// 迭代器所指之物, 指针</span></span><br><span class="line">    <span class="keyword">typedef</span> _Pointer   pointer;</span><br><span class="line">  	<span class="comment">// 迭代器所指之物的内容是否允许改变, 引用 </span></span><br><span class="line">    <span class="keyword">typedef</span> _Reference reference;</span><br><span class="line">  	<span class="comment">// 迭代器分类, 五类, 1只读, 2只写, 3允许读写 4可双向移动 5支持所有指针运算 p1+p2.. p+n, 若不支持第5类, 前四种迭代器只允许 ++ , --</span></span><br><span class="line">    <span class="keyword">typedef</span> _Category  iterator_category;</span><br><span class="line">};</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210216183157435.png" class="" title="image-20210216183157435">
-
-
-
-<h3 id="序列式容器"><a href="#序列式容器" class="headerlink" title="序列式容器"></a>序列式容器</h3><p>其中所有元素都是可序的,但未必有序. </p>
-<h3 id="vector"><a href="#vector" class="headerlink" title="vector"></a>vector</h3><p>与array的差别是静态空间的, 一旦配置就不能改变. </p>
+<h2 id="容器"><a class="markdownIt-Anchor" href="#容器"></a> 容器</h2>
+<h3 id="分类"><a class="markdownIt-Anchor" href="#分类"></a> 分类</h3>
+<img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210216183157435.png" class="" title="image-20210216183157435">
+<h3 id="序列式容器"><a class="markdownIt-Anchor" href="#序列式容器"></a> 序列式容器</h3>
+<p>其中所有元素都是可序的,但未必有序.</p>
+<h3 id="vector"><a class="markdownIt-Anchor" href="#vector"></a> vector</h3>
+<p>与array的差别是静态空间的, 一旦配置就不能改变.</p>
 <p>empty 与 size的区别</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 速度更快</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span><span class="keyword">const</span> </span>{<span class="keyword">return</span> <span class="built_in">begin</span>() == <span class="built_in">end</span>();}</span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="function">size_type <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span> </span>{<span class="keyword">return</span> <span class="built_in">size_type</span>(<span class="built_in">end</span>() - <span class="built_in">begin</span>());}</span><br></pre></td></tr></table></figure>
-
-<h3 id="vector迭代器"><a href="#vector迭代器" class="headerlink" title="vector迭代器"></a>vector迭代器</h3><p>支持随机存取, Random Access Iterators</p>
-<h3 id="分配空间"><a href="#分配空间" class="headerlink" title="分配空间"></a>分配空间</h3><p>当超过当时容量时, 容量会扩充至当前两倍, 若不够, 则继续扩张( <strong>重新配置, 元素移动, 释放原空间</strong>), 此时指向原vector的所有==迭代器都失效==, ==插入==时迭代器可能会失效</p>
-<h3 id="List迭代器"><a href="#List迭代器" class="headerlink" title="List迭代器"></a>List迭代器</h3><p>插入和接合都不会造成原有的list迭代器失效. 为了满足STL规范<strong>前闭后开</strong>区间. 刻意在环状链表的尾端加上一个<strong>空白节点</strong></p>
+<h3 id="vector迭代器"><a class="markdownIt-Anchor" href="#vector迭代器"></a> vector迭代器</h3>
+<p>支持随机存取, Random Access Iterators</p>
+<h3 id="分配空间"><a class="markdownIt-Anchor" href="#分配空间"></a> 分配空间</h3>
+<p>当超过当时容量时, 容量会扩充至当前两倍, 若不够, 则继续扩张( <strong>重新配置, 元素移动, 释放原空间</strong>), 此时指向原vector的所有<mark>迭代器都失效</mark>, <mark>插入</mark>时迭代器可能会失效</p>
+<h3 id="list迭代器"><a class="markdownIt-Anchor" href="#list迭代器"></a> List迭代器</h3>
+<p>插入和接合都不会造成原有的list迭代器失效. 为了满足STL规范<strong>前闭后开</strong>区间. 刻意在环状链表的尾端加上一个<strong>空白节点</strong></p>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210217100423856.png" class="" title="image-20210217100423856">
-
-<p>begin 和 end 仅仅是迭代器. </p>
+<p>begin 和 end 仅仅是迭代器.</p>
 <p>list并不是随机存储, 所以不支持 &gt; 与 &lt;  , +=, + 仅支持 ++与 –</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 循环</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> iter = mlist.<span class="built_in">begin</span>(); iter != mlist.<span class="built_in">end</span>(). ++iter){};</span><br><span class="line"><span class="comment">// 寻找, 在mlist中找到元素3的位置</span></span><br><span class="line">iter = <span class="built_in">find</span>(mlist.<span class="built_in">begin</span>(), mlist.<span class="built_in">end</span>(), <span class="number">3</span>);</span><br><span class="line"><span class="comment">// 插入, 将99插入到元素3的位置, 然后位置3的元素全部往后移一位.</span></span><br><span class="line">mlist.<span class="built_in">insert</span>(iter, <span class="number">99</span>);</span><br><span class="line"><span class="comment">// 根据迭代器清楚</span></span><br><span class="line">mlist.<span class="built_in">erase</span>(iter);</span><br><span class="line"><span class="comment">// 根据节点值删除</span></span><br><span class="line">mlist.<span class="built_in">remove</span>(<span class="number">99</span>);</span><br></pre></td></tr></table></figure>
-
-<h3 id="deque"><a href="#deque" class="headerlink" title="deque"></a>deque</h3><p><strong>双向</strong>开口<strong>连续线性</strong>空间, 支持元素插入和删除, <strong>随机迭代器( 与vector迭代器非常不同, 但仍然支持随机访问 )</strong>. 指针执行效率低, 若需要排序, 可将deque中的内容完整复制到vector, 对vector进行排序, 再复制回deque. </p>
-<h4 id="空间分配"><a href="#空间分配" class="headerlink" title="空间分配"></a>空间分配</h4><p>连续空间, 由一段一段的定量连续空间构成, 复杂的迭代器架构代替”重新配置, 复制, 释放”. 为了维持对外是整体连续的, 设计和迭代器操作都较为繁琐且必须由中央( map, 非STL中的map )控制. </p>
-<h4 id="deque中的map"><a href="#deque中的map" class="headerlink" title="deque中的map"></a>deque中的map</h4><p>一小块连续空间, 每个元素都是指针, 指向一块较大的连续线性空间, (缓冲区, deque存储空间的主题).  </p>
+<h3 id="deque"><a class="markdownIt-Anchor" href="#deque"></a> deque</h3>
+<p><strong>双向</strong>开口<strong>连续线性</strong>空间, 支持元素插入和删除, <strong>随机迭代器( 与vector迭代器非常不同, 但仍然支持随机访问 )</strong>. 指针执行效率低, 若需要排序, 可将deque中的内容完整复制到vector, 对vector进行排序, 再复制回deque.</p>
+<h4 id="空间分配"><a class="markdownIt-Anchor" href="#空间分配"></a> 空间分配</h4>
+<p>连续空间, 由一段一段的定量连续空间构成, 复杂的迭代器架构代替"重新配置, 复制, 释放". 为了维持对外是整体连续的, 设计和迭代器操作都较为繁琐且必须由中央( map, 非STL中的map )控制.</p>
+<h4 id="deque中的map"><a class="markdownIt-Anchor" href="#deque中的map"></a> deque中的map</h4>
+<p>一小块连续空间, 每个元素都是指针, 指向一块较大的连续线性空间, (缓冲区, deque存储空间的主题).</p>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162334313.png" class="" title="image-20210319162334313">
-
-<h3 id="deque的迭代器"><a href="#deque的迭代器" class="headerlink" title="deque的迭代器"></a>deque的迭代器</h3><p>deque是分段连续空间, 但对外是==”整体连续”==的, 为了完成该任务operator++ 和 operator–为重要的.  deque的迭代器并不是stl中通用的迭代器. 在遍历元素时, 需要检查是否<strong>跨越缓冲区</strong>如果跨越, 需要更新迭代中, first, last, node</p>
+<h3 id="deque的迭代器"><a class="markdownIt-Anchor" href="#deque的迭代器"></a> deque的迭代器</h3>
+<p>deque是分段连续空间, 但对外是==“整体连续”==的, 为了完成该任务operator++ 和 operator–为重要的.  deque的迭代器并不是stl中通用的迭代器. 在遍历元素时, 需要检查是否<strong>跨越缓冲区</strong>如果跨越, 需要更新迭代中, first, last, node</p>
 <p>包含内容:</p>
 <ul>
 <li>当前指向的元素 cur</li>
@@ -203,32 +199,7 @@ mjx-container[display="true"] + br {
 <li>管控中心, 又名中控器 node</li>
 </ul>
 <img src="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/image-20210319162643384.png" class="" title="image-20210319162643384">
-
-</div></div><div class="nextinfo"><p>上一篇：<a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛笔记</a></p><p>下一篇：没有了</p></div><div class="news_pl"><div id="comment_container"></div>
-<link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<script src="/js/md5.min.js"></script>
-<script>const gitalk = new Gitalk({
-    clientID: 'you github Client ID',
-    clientSecret: 'you github Client Secret',
-    repo: 'you github repository',
-    owner: 'you github repository owner',
-    admin: ['you github repository owner'],
-    id: md5("2021/01/29/STL源码剖析/STL源码分析笔记/"),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: true  // Facebook-like distraction free mode
-})
-gitalk.render('comment_container')</script></div></div></div></main><aside class="r_box"><div class="card box"><h2>我的名片</h2><div class="box_con"><p>职业：学生</p>
-<p>Email：874579938@qq.com</p>
-</div></div><div class="category box"><h2>文章分类</h2><div class="box_con"></div></div></aside></article><footer><section class="footer_bottom"><div class="footer_container"><p class="copyright">Design by
-<a href='https://tianhui.xin' target='_blank'>怪咖晨</a>
-京ICP备16046477号-1
-</p><ul class="social_network"></ul></div></section></footer><div class="cd-top"><i class="iconfont icon-top"></i></div>
-<script src="/js/jquery.min.js"></script>
-<script src="/js/scrollreveal.js"></script>
-<script src="/js/hc-sticky.js"></script>
-<script src="/js/canvas-nest.js" type="text/javascript" color="47,135,193" opacity="0.7" zIndex="-2" count="199"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/highlight.min.js"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/java.min.js"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/javascript.min.js"></script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="/js/common.js?v=202103251935.js"></script>
-<script src="/js/index.js?v=202103251935.js"></script>
-</body></html>
+</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="/atom.xml" target="_blank"><i class="fa fa-rss"></i></a></div><div class="footer">© 2021 <a href="/" rel="nofollow">chenyuanzhen</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
