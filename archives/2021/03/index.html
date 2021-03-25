@@ -1,232 +1,30 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>Archiv: 2021/3 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="https://chenyuanzhen.github.io/archives/2021/03/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale">
-<meta property="article:author" content="chenyuanzhen">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><title>Charles chen's blogs</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1"><meta name="description" content=""><meta name="keywords" content="计算机科学和技术"><meta name="author" content="chenyuanzhen"><link rel="short icon" href="/images/avatar.png"><link rel="icon" href="/images/avatar.png"><!--[if lt IE 9]>
+<script src="/js/modernizr.js"></script>
+<![endif]-->
+<link rel="stylesheet" href="/css/iconfont.css">
 
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
+<link rel="stylesheet" href="/css/index.css?v=202103251935.css">
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Charles chen's blogs" type="application/atom+xml">
+</head><body><header id="header" class="header-navigation"><nav><div class="logo"><a href="https://chenyuanzhen.github.io">Charles chen's blogs</a></div><h2 id="mnavh"><span class="navicon"></span></h2><ul id="starlist"><li><a href="/">首页</a></li><li><a href="/time.html">时间轴</a></li></ul><div class="searchbox"><div id="search_bar" class="search_bar"><input id="keyboard" placeholder="想搜点什么呢.." type="text" name="keyboard" autocomplete="off" class="input"><p class="search_ico"><span></span></p></div></div></nav></header><article><main><div class="blogtab"><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="/2021/03/25/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/" target="_blank">链式前向星</a></h3><span class="blogpic"><a href="/2021/03/25/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/" title="链式前向星"><img src="/" alt=""></a></span><p class="blogtext">图前向星定义又名: 边集数组, 邻接数组
+与邻接表不同,前向星 ==依靠边==来确定图. 邻接表和邻接矩阵都是依靠节点确定图
+边集数组edges:先将每一条边(起点, 终点, 权值)记录下来. 然后按照==起点节点从小到大排序==，如...</p><div class="bloginfo"><ul><li class="author"><a href="/">chenyuanzhen</a></li><li class="lmname"><a href="/"></a></li><li class="timer">2021-03-25 08:15:23</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" target="_blank">设计竞赛笔记</a></h3><span class="blogpic"><a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" title="设计竞赛笔记"><img src="/" alt=""></a></span><p class="blogtext">解题思路组合数学有m个空位中插入k棵树, 每棵树之间至少有一个空位.
+由于树互不相邻，我们可以认为至少有m-1个空位
+于是剩下n-m+1个位置放m个数
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Suche"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://chenyuanzhen.github.io"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2021" class="archive-year">2021</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-03-25T00:15:23.852Z" itemprop="datePublished">Mar 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/" class="archive-article-date">
-  <time class="dt-published" datetime="2021-03-25T00:15:23.852Z" itemprop="datePublished">Mar 25</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">算法学习</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/03/25/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B/%E8%AE%BE%E8%AE%A1%E7%AB%9E%E8%B5%9B%E4%B9%A6%E6%9C%AC%E7%AC%94%E8%AE%B0/">设计竞赛种类笔记</a>
-          </li>
-        
-          <li>
-            <a href="/2021/01/29/STL%E6%BA%90%E7%A0%81%E5%89%96%E6%9E%90/STL%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E7%AC%94%E8%AE%B0/">STL源码分析笔记</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 chenyuanzhen<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+合并, 二分与树结合尝试将其画成树, 如果是==要求每一次合并的值都是最小值==...</p><div class="bloginfo"><ul><li class="author"><a href="/">chenyuanzhen</a></li><li class="lmname"><a href="/"></a></li><li class="timer">2021-03-25 08:15:23</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div></div><div class="pagelist"><span class="page-number current">1</span></div></main><aside class="r_box"><div class="card box"><h2>我的名片</h2><div class="box_con"><p>职业：学生</p>
+<p>Email：874579938@qq.com</p>
+</div></div><div class="category box"><h2>文章分类</h2><div class="box_con"></div></div><div class="box recommend"><h2>推荐</h2><div class="box_con"><ul></ul></div></div><div class="tags box"><h2>标签</h2><div class="box_con"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/" rel="tag">算法学习</a></li></ul></div></div></aside></article><footer><section class="footer_bottom"><div class="footer_container"><p class="copyright">Design by
+<a href='https://tianhui.xin' target='_blank'>怪咖晨</a>
+京ICP备16046477号-1
+</p><ul class="social_network"></ul></div></section></footer><div class="cd-top"><i class="iconfont icon-top"></i></div>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/scrollreveal.js"></script>
+<script src="/js/hc-sticky.js"></script>
+<script src="/js/canvas-nest.js" type="text/javascript" color="47,135,193" opacity="0.7" zIndex="-2" count="199"></script>
+<script src="/js/common.js?v=202103251935.js"></script>
+<script src="/js/index.js?v=202103251935.js"></script>
+</body></html>
