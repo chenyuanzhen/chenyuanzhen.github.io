@@ -1,0 +1,166 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>正则问题 | Charles chen's blogs</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Charles chen's blogs</a><span class="subtitle">冲冲冲</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>正则问题</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2021-04-08</div><div class="post-tags"><a class="post-tag-none-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></div></div></div><article><div class="container post"><h2 id="正则问题"><a class="markdownIt-Anchor" href="#正则问题"></a> <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/1227/">正则问题</a></h2>
+<h3 id="关键词"><a class="markdownIt-Anchor" href="#关键词"></a> 关键词</h3>
+<p>栈, 递归, 正则表达式</p>
+<h3 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h3>
+<ul>
+<li>
+<p>每一个括号都代表一个x的长度, 而 | 则表示, 要从左边和右边中选择1个较长的.  接着,</p>
+</li>
+<li>
+<p>括号决定了处理顺序, 如果一个括号中<mark>包含</mark>另一个括号, 那么需要<mark>先处理完里面的括号</mark>, 才能去处理外面的括号. 而每一个括号的<mark>处理方式是一致</mark>的.</p>
+<p>至此, 题目分析已经可以用递归去做了. 但看到这道题时, 让我想起用栈做过的一道经典题, 中缀表达式计算. 一个栈存符号, 一个栈存数字. 该题有熟悉的感觉. 所以打算用栈解决该问题.</p>
+</li>
+</ul>
+<h3 id="步骤"><a class="markdownIt-Anchor" href="#步骤"></a> 步骤</h3>
+<p>先说一下递归的步骤吧</p>
+<p>需要一个递归函数, 根据当前的正则表达式索引, 返回一个该括号能容纳x的个数?</p>
+<ol>
+<li>
+<p>见到左括号, 说明包含一个括号, 需要优先处理该括号( 递归处理 )</p>
+</li>
+<li>
+<p>见到 | , 说明需要做出选择, 假设目前已经当前括号内知道左边的最大x个数, 要求右边的最大x个数, 进行递归处理.</p>
+</li>
+<li>
+<p>见到 x, 当前拥有x个数++.</p>
+</li>
+<li>
+<p>见到 ) . 需要返回当前的x个数.<br>
+因为 ) 表示一个括号的结束, 需要得到一个结果</p>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// using namespace 和头文件略去</span></span><br><span class="line"><span class="keyword">int</span> indexes = <span class="number">-1</span>;</span><br><span class="line">string input;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">( )</span></span>{</span><br><span class="line">    ++indexes;</span><br><span class="line">    <span class="keyword">int</span> counter = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(indexes &lt; input.<span class="built_in">size</span>() &amp;&amp; (input[indexes] == <span class="string">'x'</span> || input[indexes] == <span class="string">'('</span>)){</span><br><span class="line">      	<span class="comment">// 见到 x, 当前拥有x个数++. </span></span><br><span class="line">        <span class="keyword">if</span>(input[indexes] == <span class="string">'x'</span>) {</span><br><span class="line">            ++counter;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span>{</span><br><span class="line">          <span class="comment">// 见到左括号, 说明包含一个括号, 需要优先处理该括号( 递归处理 )</span></span><br><span class="line">            counter += <span class="built_in">dfs</span>();</span><br><span class="line">        }</span><br><span class="line">        ++indexes;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 防止抹去符号</span></span><br><span class="line">    <span class="keyword">char</span> tmp = input[indexes];</span><br><span class="line">  	<span class="comment">// 见到 ) . 需要返回当前的x个数. </span></span><br><span class="line">    <span class="keyword">if</span>(tmp == <span class="string">')'</span>) {</span><br><span class="line">        <span class="keyword">return</span> counter;</span><br><span class="line">    }</span><br><span class="line">		<span class="comment">// 见到 | , 说明需要做出选择</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(tmp == <span class="string">'|'</span>){</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(counter, <span class="built_in">dfs</span>());</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> counter;</span><br><span class="line">    </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">getline</span>(cin , input);</span><br><span class="line">  	<span class="comment">// 在最外围添加(), 保证整个式子是一个括号()</span></span><br><span class="line">    input.<span class="built_in">insert</span>(input.<span class="built_in">begin</span>(), <span class="string">'('</span>);</span><br><span class="line">    input.<span class="built_in">insert</span>(input.<span class="built_in">end</span>(), <span class="string">')'</span>);</span><br><span class="line">    cout &lt;&lt; <span class="built_in">dfs</span>();</span><br><span class="line">}</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>非递归, 迭代作法</p>
+<p>((xx|xxx)x|(x|xx))xx</p>
+<p>将上述式子转化为</p>
+<p>(((2|3)1|(1|2))2)</p>
+<p>步骤执行:</p>
+<ol>
+<li>(((3)1|(1|2))2)</li>
+<li>((4|(1|2))2)</li>
+<li>((4|(2))2)</li>
+<li>(((4)2))</li>
+<li>(6)</li>
+</ol>
+<p>其中的数字为, B所存放的元素.</p>
+<p>可见非迭代也是优先处理括号里的括号</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把递归的solve换成该solve, 再补上头文件stack即可</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span> </span>{</span><br><span class="line">    string input;</span><br><span class="line">    <span class="built_in">getline</span>(cin, input);</span><br><span class="line">    input.<span class="built_in">insert</span>(input.<span class="built_in">begin</span>(), <span class="string">'('</span>);</span><br><span class="line">    input.<span class="built_in">insert</span>(input.<span class="built_in">end</span>(), <span class="string">')'</span>);</span><br><span class="line"></span><br><span class="line">    stack&lt;<span class="keyword">char</span>&gt; stackA;</span><br><span class="line">  	<span class="comment">// stackB表示的 当前括号 的最大x长度</span></span><br><span class="line">    stack&lt;<span class="keyword">int</span>&gt; stackB;</span><br><span class="line">  	<span class="comment">// 防止栈B空了 +0 对结果不会有影响</span></span><br><span class="line">    stackB.<span class="built_in">push</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; input.<span class="built_in">size</span>(); ++i) {</span><br><span class="line">				<span class="comment">// 符号入栈</span></span><br><span class="line">        <span class="keyword">if</span> (input[i] == <span class="string">'('</span> || input[i] == <span class="string">')'</span> || input[i] == <span class="string">'|'</span>)</span><br><span class="line">            stackA.<span class="built_in">push</span>(input[i]);</span><br><span class="line">				<span class="comment">// 见到符号) 表示需要清算了</span></span><br><span class="line">        <span class="keyword">if</span> (!stackA.<span class="built_in">empty</span>() &amp;&amp; stackA.<span class="built_in">top</span>() == <span class="string">')'</span>) {</span><br><span class="line">            stackA.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">while</span> (stackA.<span class="built_in">top</span>() != <span class="string">'('</span>) {</span><br><span class="line">								<span class="comment">// 从后往前处理选择|</span></span><br><span class="line">                <span class="keyword">if</span> (stackA.<span class="built_in">top</span>() == <span class="string">'|'</span>) {</span><br><span class="line">                    <span class="keyword">int</span> tmp1 = stackB.<span class="built_in">top</span>();</span><br><span class="line">                    stackB.<span class="built_in">pop</span>();</span><br><span class="line">                    <span class="keyword">int</span> tmp2 = stackB.<span class="built_in">top</span>();</span><br><span class="line">                    stackB.<span class="built_in">pop</span>();</span><br><span class="line">                    stackB.<span class="built_in">push</span>(<span class="built_in">max</span>(tmp2, tmp1));</span><br><span class="line">                }</span><br><span class="line">                stackA.<span class="built_in">pop</span>();</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">// 处理完|后, 直接和前面汇合</span></span><br><span class="line">            <span class="keyword">int</span> tmp1 = stackB.<span class="built_in">top</span>();</span><br><span class="line">            stackB.<span class="built_in">pop</span>();</span><br><span class="line">            stackB.<span class="built_in">top</span>() += tmp1;</span><br><span class="line">            stackA.<span class="built_in">pop</span>();</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不管是(还是|, 说明需要重新计算一个括号</span></span><br><span class="line">        <span class="keyword">if</span> (input[i] == <span class="string">'('</span> || input[i] == <span class="string">'|'</span>) {</span><br><span class="line">            stackB.<span class="built_in">push</span>(<span class="number">0</span>);</span><br><span class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> (input[i] == <span class="string">'x'</span>) {</span><br><span class="line">            ++stackB.<span class="built_in">top</span>();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    cout &lt;&lt; stackB.<span class="built_in">top</span>();</span><br><span class="line">}</span><br></pre></td></tr></table></figure></div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:874579938@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a></div><div class="footer">© 2021 <a href="/" rel="nofollow">chenyuanzhen</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
