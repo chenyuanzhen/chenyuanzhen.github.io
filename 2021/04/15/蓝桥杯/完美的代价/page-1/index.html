@@ -1,0 +1,176 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>完美的代价 | Charles chen's blogs</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">Charles chen's blogs</a><span class="subtitle">冲冲冲</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>完美的代价</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2021-04-15</div><div class="post-tags"><a class="post-tag-none-link" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" rel="tag">蓝桥杯</a></div></div></div><article><div class="container post"><h2 id="完美的代价"><a class="markdownIt-Anchor" href="#完美的代价"></a> <a target="_blank" rel="noopener" href="http://oj.ecustacm.cn/problem.php?id=1418">完美的代价</a></h2>
+<h3 id="关键词"><a class="markdownIt-Anchor" href="#关键词"></a> 关键词:</h3>
+<p>模拟 + 贪心</p>
+<h3 id="分析"><a class="markdownIt-Anchor" href="#分析"></a> 分析</h3>
+<p>回文串, 真的是令人着迷.</p>
+<p>不得不说的是, 回文串有一个特点</p>
+<p>第一个等于倒数第一个, 第二个等于倒数第二个…</p>
+<p>但是!</p>
+<p>对于<mark>奇数</mark>长度的回文串, 最中间的字符是不遵守这个法则.</p>
+<p>这就导致, 很多涉及到回文串的题目, 都需要考虑一下, 奇数长度的字符串到底要不要特殊处理变成一般情况处理. 而对于该题, 是要的.</p>
+<p>一般涉及到字符串更改的, 都会让我想到动态规划. 例如</p>
+<ul>
+<li>给出一个字符串, 求增添多少个字符可以变成回文.</li>
+<li>给出两个字符串, 允许增删改, 求最少对一个字符串操作多少次, 能整个两个一样<br>
+等</li>
+</ul>
+<p>所以, 自然的, 一开始, 我也认为该题是动态规划, 而且还要求最少的交换次数. 对于上述问题中, 都不会进行模拟, 比如问题二中, 无论是增删改三个操作, 对应仅仅是索引的变化, 而不会对原字符串真的做出增删改. 而该题不行, 需要实实在在的进行模拟. 原因也很简单, 对于上述两个问题中, 在考虑问题时, 都无需考虑之前所进行的操作. 对该状态进行抉择时, 仅仅只是关注值的大小, 至于这个值怎么来的, 是不在意的. 而该问题, 是需要考虑之前状态做过的操作( 即交换过的字符 ), 当然, 这个也取决于<mark>状态的定义</mark>. 而该问题的状态定义怎么来的, 下文会说.</p>
+<p>缩小子问题, 对第一件事可以肯定是缩小子问题.</p>
+<ul>
+<li>从内往外走, 即从字符串中间出发, 不断处理两边, 通过交换操作, 使其变成回文, 是一个方向. 但不可靠, 因为交换操作时, 会移动中间原本已经是回文的子串, 而移动后, 大概率使得中间子串<mark>丢失</mark>回文的属性, 所以不行</li>
+<li>从两边往内走. 即先让开头和结尾构成回文, 再通过交换操作, 一步步往中间走变成回文. 这个思路的话, 交换操作并不会改变开头和结尾已经是回文的子串. 所以, 以这个思路.思考</li>
+</ul>
+<p>从两头出发, 如果发现两头字符不同, 则检查左右两边的字符, 谁的交换次数少, 则变成谁的样子.  我们先从简单的情况思考, 字符串长度为偶数.</p>
+<blockquote>
+<p>例如 mamazz</p>
+<p>操作1: 将尾字母通过交换操作, 变成m. 交换次数,3次</p>
+<p>操作2: 将首字母, 通过交换操作变成z. 交换次数, 4次.</p>
+<p>那么我们先选择操作1</p>
+<p>maazzm</p>
+<p>接着是又有两个操作可以选择.</p>
+<p>操作1: 将字母a通过交换操作, 变成z. 交换次数, 2次</p>
+<p>操作2: 将字母z, 通过交换操作变成a. 交换次数, 2次.</p>
+<p>emm.这里其实可以操作2或者1都没所谓, 按照动态规划的思路, 这里状态就明显了,</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">串</mi><mi>A</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[字符串A][i][j]</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">串</span><span class="mord mathdefault">A</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span></span></span></span> : 表示子串<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mi>i</mi><mo stretchy="false">]</mo><mo separator="true">,</mo><mo stretchy="false">[</mo><mi>j</mi><mo separator="true">,</mo><mi>l</mi><mi>e</mi><mi>n</mi><mi>g</mi><mi>t</mi><mi>h</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[0, i], [j, length)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mclose">)</span></span></span></span> 已经是回文而且字符串为A所需要的最小交换次数</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">串</mi><mi>A</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo><mo>=</mo><mi>m</mi><mi>i</mi><mi>n</mi><mo stretchy="false">(</mo><mo stretchy="false">[</mo><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">串</mi><mi>B</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>i</mi><mo>−</mo><mn>1</mn><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>j</mi><mo stretchy="false">]</mo><mo>+</mo><mi>B</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">成</mi><mi>A</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">交</mi><mi mathvariant="normal">换</mi><mi mathvariant="normal">次</mi><mi mathvariant="normal">数</mi><mo separator="true">,</mo><mo stretchy="false">[</mo><mi mathvariant="normal">字</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">串</mi><mi>C</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>i</mi><mo stretchy="false">]</mo><mo stretchy="false">[</mo><mi>j</mi><mo>+</mo><mn>1</mn><mo stretchy="false">]</mo><mo>+</mo><mi>C</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">成</mi><mi>A</mi><mi mathvariant="normal">的</mi><mi mathvariant="normal">交</mi><mi mathvariant="normal">换</mi><mi mathvariant="normal">次</mi><mi mathvariant="normal">数</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[字符串A][i][j] = min([字符串B][i-1][j]+B变成A的交换次数, [字符串C][i][j+1]+ C变成A的交换次数)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">串</span><span class="mord mathdefault">A</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">i</span><span class="mord mathdefault">n</span><span class="mopen">(</span><span class="mopen">[</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">串</span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05017em;">B</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">成</span><span class="mord mathdefault">A</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">交</span><span class="mord cjk_fallback">换</span><span class="mord cjk_fallback">次</span><span class="mord cjk_fallback">数</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">[</span><span class="mord cjk_fallback">字</span><span class="mord cjk_fallback">符</span><span class="mord cjk_fallback">串</span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">]</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">成</span><span class="mord mathdefault">A</span><span class="mord cjk_fallback">的</span><span class="mord cjk_fallback">交</span><span class="mord cjk_fallback">换</span><span class="mord cjk_fallback">次</span><span class="mord cjk_fallback">数</span><span class="mclose">)</span></span></span></span></p>
+<p>但很明显, 很难表示字符串状态. 而且我们也需要字符串的状态, 因为构成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mi>i</mi><mo stretchy="false">]</mo><mo separator="true">,</mo><mo stretchy="false">[</mo><mi>j</mi><mo separator="true">,</mo><mi>l</mi><mi>e</mi><mi>n</mi><mi>g</mi><mi>t</mi><mi>h</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">[0, i],[j, length)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">i</span><span class="mclose">]</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mopen">[</span><span class="mord mathdefault" style="margin-right:0.05724em;">j</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">e</span><span class="mord mathdefault">n</span><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="mord mathdefault">t</span><span class="mord mathdefault">h</span><span class="mclose">)</span></span></span></span>是回文的子串有很多种. 而且我们要根据<mark>先前</mark>字符串比较当前字符串才能得到交换的次数, 而且不同的先前字符串还不同. 哇~, 动态规划不行呀, 考虑的东西太多了, 状态还难表示.</p>
+</blockquote>
+<p>但题目还是要做的. <s>上网查询知</s>, 该题是<mark>贪心</mark>, 说实话, 难以想象. 不过贪心的作法, 很难证明, 跟该思路很相近. 也是从两头往中间靠, 同时也说明, 对于样例不管你选左边还是右边, 只要遵循一个准则, 那就是每一次选择, 都选择离当前字母最远的相同字母.</p>
+<blockquote>
+<p>例子 aabba<mark>a</mark>cc</p>
+<p>如果将末尾的c用a换掉, 肯定是选择最靠近末尾的a, 即aabba<mark>a</mark>cc.</p>
+</blockquote>
+<p>而该准则, 在上述过程中, 得到交换次数的方法是一致的. 也就说, 按照此守则, 穷举例子 mamazz的选择方案, 你会发现, 不论每一次是选左边还是右边, 最终的到的结果都是一样的. 想要发现这个规律 除了穷举例子, 暂时还想不到什么办法.</p>
+<h3 id="注意项"><a class="markdownIt-Anchor" href="#注意项"></a> 注意项</h3>
+<ul>
+<li>题目不保证一定可以构成回文
+<ul>
+<li>偶数长度, 每一种字母个数都必须是偶数,</li>
+<li>奇数长度, 有且仅有一种字母个数是奇数, 其余必须都是偶数</li>
+</ul>
+</li>
+<li>对于奇数长度中, 有一个字符是必须要在中间的, 例如mdama. 得到的结果应该是2. 对于这种情况, 当发现右边找不到相同的, 说明处理到该字符, 直接将其移动到中间, 并记录步数. 而代码中, 采取是忽视, 即不移动到中间, 只加交换次数, 加完后, 就等于把这个中间字符删除了.</li>
+</ul>
+<h4 id=""><a class="markdownIt-Anchor" href="#"></a> </h4>
+<h3 id="代码"><a class="markdownIt-Anchor" href="#代码"></a> 代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> O2;</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> ll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line">ll save[<span class="number">27</span>];</span><br><span class="line"><span class="keyword">char</span> nums[<span class="number">8100</span>];</span><br><span class="line">ll counter = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, (nums+<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">int</span> end = n + <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 检查是否可以构成回文</span></span><br><span class="line">    <span class="comment">// 统计字符</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; end; ++i) {</span><br><span class="line">        ++save[nums[i] - <span class="string">'a'</span>];</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 偶数长度</span></span><br><span class="line">    <span class="keyword">if</span>(n % <span class="number">2</span> == <span class="number">0</span>){</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) {</span><br><span class="line">            <span class="keyword">if</span>(save[i] % <span class="number">2</span> != <span class="number">0</span>){</span><br><span class="line">                cout &lt;&lt; <span class="string">"Impossible"</span>;</span><br><span class="line">                <span class="keyword">return</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 奇数长度</span></span><br><span class="line">    <span class="keyword">else</span>{</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">26</span>; ++i) {</span><br><span class="line">            <span class="keyword">if</span>(save[i] % <span class="number">2</span> != <span class="number">0</span>){</span><br><span class="line">                <span class="keyword">if</span>(flag){</span><br><span class="line">                    cout &lt;&lt; <span class="string">"Impossible"</span>;</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                }</span><br><span class="line">                flag = <span class="literal">true</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> start = <span class="number">1</span>; start &lt; end; ++start) {</span><br><span class="line">        <span class="comment">// 找到与[start]相同的字符</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = end - <span class="number">1</span>; j &gt;= start; --j) {</span><br><span class="line">            <span class="comment">// 将中间字符转移到最中间 假装将奇数字符移到中间, 但不进行实际的转移</span></span><br><span class="line">            <span class="keyword">if</span>(start == j){</span><br><span class="line">                counter += n / <span class="number">2</span> - start + <span class="number">1</span>;</span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(nums[j] == nums[start]){</span><br><span class="line">                <span class="comment">// 将其转移到end - 1上 模拟</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &lt; end - <span class="number">1</span>; ++k) {</span><br><span class="line">                    <span class="built_in">swap</span>(nums[k], nums[k + <span class="number">1</span>]);</span><br><span class="line">                    ++counter;</span><br><span class="line">                }</span><br><span class="line">                --end;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; counter;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="built_in">solve</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:874579938@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a></div><div class="footer">© 2021 <a href="/" rel="nofollow">chenyuanzhen</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
