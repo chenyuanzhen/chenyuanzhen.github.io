@@ -1094,7 +1094,8 @@ ext2会分配一个inode与相对于该文件大小的block数量给文件</li>
 </li>
 <li>
 <p>别名设置 alias<br>
-用别名代替其他命令名 alias name=command</p>
+用别名代替其他命令名 alias name=command<br>
+使用时 无需$</p>
 </li>
 <li>
 <p>工作控制</p>
@@ -1147,6 +1148,39 @@ shell scripts</p>
 <h4 id="特殊变量"><a class="markdownIt-Anchor" href="#特殊变量"></a> 特殊变量</h4>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 返回上一执行命令的返回的错误码, 0为正常, 其余为错误代码</span></span><br><span class="line">echo $? </span><br></pre></td></tr></table></figure>
 <h4 id=""><a class="markdownIt-Anchor" href="#"></a> </h4>
+<h3 id="bash-shell的操作环境"><a class="markdownIt-Anchor" href="#bash-shell的操作环境"></a> bash shell的操作环境</h3>
+<p>路径与指令搜索顺序</p>
+<ol>
+<li>以相对或绝对路径执行指令</li>
+<li>由alias找到对应指令执行</li>
+<li>bash内置指令</li>
+<li>通过$PATH这个变量的顺序搜索到的第一个指令来执行</li>
+</ol>
+<h4 id="进站与欢迎讯息"><a class="markdownIt-Anchor" href="#进站与欢迎讯息"></a> 进站与欢迎讯息</h4>
+<p>/etc/issue</p>
+<p>修改/etc/issue文件</p>
+<p>在 issue文件中 \ + 英文字符会有特殊函数</p>
+<ul>
+<li>\d 本地端时间的日期</li>
+<li>\l 显示第几个终端机接口</li>
+<li>\n 显示主机网络名称</li>
+<li>\O 显示域名</li>
+</ul>
+<img src="/2021/07/24/linux%E7%AC%94%E8%AE%B0/index/image-20210806174700947.png" class="" title="image-20210806174700947">
+<p>而 <a target="_blank" rel="noopener" href="http://issue.net">issue.net</a> 用于远程访问</p>
+<p>/etc/motd文件</p>
+<p>用于让使用者登录后获取信息</p>
+<h3 id="bash的环境配置文件"><a class="markdownIt-Anchor" href="#bash的环境配置文件"></a> bash的环境配置文件</h3>
+<h4 id="无登录shell-与-有登录shell"><a class="markdownIt-Anchor" href="#无登录shell-与-有登录shell"></a> 无登录shell 与 有登录shell</h4>
+<p>无登录shell</p>
+<p>是基于图形化接口启动终端, 无需输入密码,</p>
+<p>读取 ~/.bashrc文件</p>
+<p>有登录shell</p>
+<p>是开机时即打开shell, 需要密码才可使用</p>
+<p>有登录shell 会读取 /etc/profile (系统整体设置) 与 ~/.bash_profile 使用者个人设置</p>
+<img src="/2021/07/24/linux%E7%AC%94%E8%AE%B0/index/image-20210806175218878.png" class="" title="image-20210806175218878">
+<p>login_shell的读取流程</p>
+<p>可用source命令读取配置文件内容</p>
 </div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:874579938@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a></div><div class="footer">© 2021 <a href="/" rel="nofollow">chenyuanzhen</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
     $(".fancybox").fancybox();
 });
