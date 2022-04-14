@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>Linux进程 | 笔记仓库</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">笔记仓库</a><span class="subtitle">知道为什么比知道怎么做更重要</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>Linux进程</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2022-03-25</div><div class="post-tags"><a class="post-tag-none-link" href="/tags/Linux/" rel="tag">Linux</a></div></div></div><article><div class="container post"><h2 id="进程创建"><a class="markdownIt-Anchor" href="#进程创建"></a> 进程创建</h2>
+<h3 id="fork系统调用"><a class="markdownIt-Anchor" href="#fork系统调用"></a> fork系统调用</h3>
+<ul>
+<li>
+<p>父进程: 返回子进程PID</p>
+<ul>
+<li>失败会返回-1</li>
+</ul>
+</li>
+<li>
+<p>子进程: 返回0</p>
+<blockquote>
+<p>子进程可通过<code>getpid()</code>调用, 获得自己的PID</p>
+<p>通过<code>getppid()</code>调用, 获得父PID</p>
+</blockquote>
+</li>
+</ul>
+<p><code>fork</code>会复制PCB中的信息</p>
+<p>子进程会获得父进程的栈, 数据, 堆的拷贝. 两者互不干扰</p>
+<blockquote>
+<p>可以将将父进程设想为分裂以产生其自身的两个副本</p>
+<p>子进程和父进程运行在分开的内存地区.</p>
+</blockquote>
+<blockquote>
+<p>实际实现子进程拷贝父进程堆栈, 数据时, 并不是真的完全拷贝, 而是采用<mark>写时拷贝  copy on write</mark>的技术.</p>
+<p>基本思想:</p>
+<p>只读的数据就共享, 当子或父进程想要修改时, 才对要修改的数据进行拷贝, 并在拷贝上修改.</p>
+<blockquote>
+<p>数据是指内存页或内存段</p>
+</blockquote>
+</blockquote>
+<p><code>fork</code>调用样例代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* Used in parent after successful fork() to record PID of child */</span></span><br><span class="line"><span class="keyword">pid_t</span> childPid; </span><br><span class="line"><span class="keyword">switch</span> (childPid = fork()) &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="number">-1</span>: <span class="comment">/* fork() failed */</span></span><br><span class="line">   <span class="comment">/* Handle error */</span></span><br><span class="line">  <span class="keyword">case</span> <span class="number">0</span>: <span class="comment">/* Child of successful fork() comes here */</span></span><br><span class="line">   <span class="comment">/* Perform actions specific to child */</span></span><br><span class="line">  <span class="keyword">default</span>: <span class="comment">/* Parent comes here after successful fork() */</span></span><br><span class="line">   <span class="comment">/* Perform actions specific to parent */</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 父进程和子进程都会执行switch以后的代码段</span></span><br></pre></td></tr></table></figure>
+<h4 id="文件描述符"><a class="markdownIt-Anchor" href="#文件描述符"></a> 文件描述符</h4>
+<p>父进程和子进程是<mark>共用</mark>文件描述符.</p>
+<blockquote>
+<p>而非拷贝</p>
+</blockquote>
+<blockquote>
+<p>文件描述符包括</p>
+<ul>
+<li>文件指针</li>
+<li>打开文件标识( 只读还是读写 )</li>
+</ul>
+</blockquote>
+<p>子进程修改文件描述符, 是会影响到父进程.</p>
+<h3 id="子进程与父进程的区别"><a class="markdownIt-Anchor" href="#子进程与父进程的区别"></a> 子进程与父进程的区别</h3>
+<ul>
+<li>
+<p>子进程有自己独一无二的PID.</p>
+</li>
+<li>
+<p>父进程的PID与子进程的父亲PID一样</p>
+</li>
+<li>
+<p>子进程<mark>不会继承父亲的内存锁</mark></p>
+</li>
+<li>
+<p>进程资源利用率和CPU占用时间会清零在子进程, 即重新计算</p>
+</li>
+<li>
+<p>子进程的待处理信号集为空</p>
+</li>
+<li>
+<p>子进程不会从父进程继承信号量调整</p>
+</li>
+<li>
+<p>子进程不会继承父进程关联的锁.</p>
+<blockquote>
+<p>但会继承父进程打开的文件描述符</p>
+</blockquote>
+</li>
+<li>
+<p>子继承不会继承父进程尚未完成的异步I/O</p>
+</li>
+<li>
+<p>子进程会完全复制父进程的虚拟地址空间</p>
+</li>
+</ul>
+<h4 id="对于linux系统额外的不同"><a class="markdownIt-Anchor" href="#对于linux系统额外的不同"></a> 对于Linux系统额外的不同</h4>
+<ul>
+<li>当父进程中断时, 子进程是不会收到信号</li>
+<li>子进程结束的时候会自动发送<code>SIGCHLD</code>信号给父进程, 该信号处理默认是不处理</li>
+<li>子进程会继承父进程的目录流</li>
+</ul>
+<h2 id="shell-执行一个可执行程序的基本步骤"><a class="markdownIt-Anchor" href="#shell-执行一个可执行程序的基本步骤"></a> Shell 执行一个可执行程序的基本步骤</h2>
+<h3 id="exitstatus系统调用-与-wait系统调用"><a class="markdownIt-Anchor" href="#exitstatus系统调用-与-wait系统调用"></a> exit(status)系统调用 与 wait()系统调用</h3>
+<p><code>exit(status)</code>会中断当前进程. 参数<code>status</code>是整型, 反映中断状态.</p>
+<p>使用<code>wait()</code>, 父进程可以获得子进程<code>exit</code>的<code>status</code>.</p>
+<blockquote>
+<p>wait调用, 父进程会等待子进程执行完毕.</p>
+</blockquote>
+<h3 id="execvepathname-argv-envp-系统调用"><a class="markdownIt-Anchor" href="#execvepathname-argv-envp-系统调用"></a> execve(pathname, argv, envp) 系统调用</h3>
+<p>往当前进程内存中加载新的程序.  原有的栈, 数据, 堆会被丢弃. 加载新的程序会有新的堆, 栈与数据存储.</p>
+<p><code>exec(...)</code>调用是<code>execve(...)</code>的默认版.</p>
+<img src="https://github.com/chenyuanzhen/chenyuanzhen.github.io/blob/image/image/2022-04-13_10:08:44-image-20220408112632491.png?raw=true" alt="image-20220408112632491" style="zoom:50%;" />
+<blockquote>
+<p>Shell中运行可执行程序的流程图</p>
+</blockquote>
+<h2 id="参考"><a class="markdownIt-Anchor" href="#参考"></a> 参考</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://man7.org/tlpi/download/TLPI-24-Process_Creation.pdf">THE LINUX PROGRAMMING INTERGACE 第24章</a></li>
+<li><a target="_blank" rel="noopener" href="https://man7.org/linux/man-pages/man2/fork.2.html">fork函数调用文档</a></li>
+</ul>
+</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:874579938@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a></div><div class="footer">© 2022 <a href="/" rel="nofollow">镇远</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>

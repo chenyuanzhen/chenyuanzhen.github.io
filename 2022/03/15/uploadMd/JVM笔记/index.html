@@ -1,0 +1,395 @@
+<!DOCTYPE html><html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>JVM笔记 | 笔记仓库</title><link rel="stylesheet" type="text/css" href="/css/normalize.css"><link rel="stylesheet" type="text/css" href="/css/highlight.css"><link rel="stylesheet" type="text/css" href="/css/very-simple.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.5.0/css/font-awesome.min.css"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0"></head><body><!-- include the sidebar--><!-- include ./includes/sidebar.jade--><!-- Blog title and subtitle--><header><div class="container header"><a id="logo" href="/." class="title">笔记仓库</a><span class="subtitle">知道为什么比知道怎么做更重要</span><label id="toggle-menu" for="menu" onclick><i class="fa fa-bars"></i></label></div></header><!-- use checkbox hack for toggle nav-bar on small screens--><input id="menu" type="checkbox"><!-- Navigation Links--><nav id="nav"><div class="container"><a href="/" class="sidebar-nav-item active">Home</a><a href="/archives" class="sidebar-nav-item">Archives</a><a href="/about" class="sidebar-nav-item">About</a></div></nav><div id="header-margin-bar"></div><!-- gallery that comes before the header--><div class="wrapper"><div class="container post-header"><h1>JVM笔记</h1></div></div><div class="wrapper"><div class="container meta"><div class="post-time">2022-03-15</div><div class="post-tags"><a class="post-tag-none-link" href="/tags/Java/" rel="tag">Java</a></div></div></div><article><div class="container post"><p>Java Virtual Machine 虚拟机, 读入.class文件</p>
+<h2 id="jvm生命周期"><a class="markdownIt-Anchor" href="#jvm生命周期"></a> JVM生命周期</h2>
+<ol>
+<li>
+<p>启动</p>
+<p>通过引导类加载器, 创建一个初始类完成</p>
+</li>
+<li>
+<p>执行</p>
+<p>执行一个Java程序</p>
+</li>
+<li>
+<p>退出</p>
+</li>
+</ol>
+<h2 id="构成"><a class="markdownIt-Anchor" href="#构成"></a> 构成</h2>
+<h4 id="类加载器"><a class="markdownIt-Anchor" href="#类加载器"></a> 类加载器</h4>
+<ul>
+<li>引导类加载器</li>
+<li>扩展类加载器</li>
+<li>应用加载器</li>
+</ul>
+<h4 id="线程共享区"><a class="markdownIt-Anchor" href="#线程共享区"></a> 线程共享区</h4>
+<ul>
+<li>方法区</li>
+</ul>
+<blockquote>
+<p>存放类信息，常量，静态变量，编译后代码···等</p>
+</blockquote>
+<p><code>native</code>修饰的方法是本地方法, 不由Java实现, 由JVM实现.</p>
+<ul>
+<li>
+<p>堆</p>
+<blockquote>
+<p>负责存储数据</p>
+</blockquote>
+<p>堆内存分为<code>年轻代</code>和<code>老年代</code></p>
+<p>大部分new对象会进入堆空间, 但线程的栈与<code>TLAB</code>, 也被允许存储对象</p>
+<ul>
+<li>
+<p>TLAB (Thread - local allocation buffer)</p>
+<p>线程私有内存空间, 默认占用年轻代 1%空间. 由于线程独享, 无锁开销.</p>
+<blockquote>
+<p>目的是加快对象分配, 在堆中分配内存是需要加锁的.</p>
+</blockquote>
+<p>与共享内存使用方法一样</p>
+<p>用于存放线程中<mark>小且立即丢弃的</mark>对象</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="线程独享区"><a class="markdownIt-Anchor" href="#线程独享区"></a> 线程独享区</h4>
+<ul>
+<li>
+<p>栈</p>
+<blockquote>
+<p>负责执行代码</p>
+</blockquote>
+<ul>
+<li>存放局部变量, 方法出口, 动态链表等</li>
+<li>程序结束, 栈的空间自动释放</li>
+</ul>
+<blockquote>
+<p>这里也被允许存放对象,</p>
+<p>该对象的生命周期会随着方法的调用开始而开始, 调用结束和结束. 出于减轻GC负担考虑.</p>
+<p>对象回收无需GC介入, 但栈空间小, 对象过大则无法分配</p>
+</blockquote>
+<p><code>逃逸分析</code> 若一个类的句柄位于方法之外, 则会被认为发生逃逸, 不会放在栈中, 此外, 若句柄被返回出去, 也会视为逃逸, 不会放在栈内.</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span>&#123;</span><br><span class="line">  <span class="keyword">private</span> Address address;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">setAddress</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 此处则发生逃逸</span></span><br><span class="line">    address = <span class="keyword">new</span> Address();</span><br><span class="line">    address.set(name);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>程序计数器</p>
+</li>
+</ul>
+<h4 id="本地方法接口"><a class="markdownIt-Anchor" href="#本地方法接口"></a> 本地方法接口</h4>
+<p>JVM实现Java中native修饰的方法</p>
+<h4 id="jit-执行引擎"><a class="markdownIt-Anchor" href="#jit-执行引擎"></a> JIT 执行引擎</h4>
+<p>将.class字节码转为二进制机器指令</p>
+<h2 id="类加载"><a class="markdownIt-Anchor" href="#类加载"></a> 类加载</h2>
+<p>阶段</p>
+<ul>
+<li>
+<p>加载</p>
+<p>由类加载器负责</p>
+<ul>
+<li>
+<p>引导类加载器 Bootstrap ClassLoader</p>
+<blockquote>
+<p>采用C和C++编写, 无法获取. 仅用于加载java的核心类</p>
+</blockquote>
+<p>仅加载 java/目录下的类库, 核心的API, 如String</p>
+</li>
+<li>
+<p>扩展类加载器 ClassLoader</p>
+<blockquote>
+<p>继承Java.lang.ClassLoader</p>
+</blockquote>
+</li>
+<li>
+<p>系统类加载器 Application ClassLoader</p>
+</li>
+</ul>
+<blockquote>
+<p>包含关系, 并不是继承关系</p>
+<p>如目录包含</p>
+<p>引导类包含扩展类, 扩展类包含系统类</p>
+</blockquote>
+<blockquote>
+<p>允许自定义加载类</p>
+<ul>
+<li>防止类路径冲突</li>
+<li>自定义class加载, 防止源码泄漏</li>
+</ul>
+</blockquote>
+<p>每一个class仅由一种加载器加载</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 无法获取, 因为是引导类加载器, 采用C和C++编写</span></span><br><span class="line"><span class="comment">// 得到的是null</span></span><br><span class="line">ClassLoader loader = String.class.getClassLoader();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>类加载器: 负责动态加载Java类到Java虚拟机的内存空间中</p>
+</blockquote>
+</li>
+<li>
+<p>链接</p>
+<ul>
+<li>验证</li>
+<li>准备</li>
+<li>解析</li>
+</ul>
+</li>
+<li>
+<p>初始化</p>
+</li>
+</ul>
+<h4 id="类加载过程"><a class="markdownIt-Anchor" href="#类加载过程"></a> 类加载过程</h4>
+<p>加载 -&gt; 验证 -&gt; 准备 -&gt; 解析 -&gt; 初始化</p>
+<ul>
+<li>
+<p>加载</p>
+<ol>
+<li>
+<p>对应该类的二进制字节流</p>
+</li>
+<li>
+<p>将字节流<code>静态存储结构</code>放在方法区</p>
+</li>
+<li>
+<p>生成一个 java.lang.Class对象, 用于反射</p>
+</li>
+</ol>
+</li>
+<li>
+<p>验证</p>
+<p>确保class文件的字节流包含信息符合虚拟机要求, 防止class文件对虚拟机造成破坏</p>
+</li>
+<li>
+<p>准备</p>
+<p>为类变量分配内存并设置该变量的对应零值.</p>
+<blockquote>
+<p><mark>在<code>&lt;clinit&gt;</code>后, 才会被赋于设定初始值</mark></p>
+</blockquote>
+<p>经过该阶段, 类的静态变量已被分配内存并赋予零值. 但尚未赋予<mark>设定</mark>的初值</p>
+</li>
+<li>
+<p>解析</p>
+<p>将符号引用转为直接引用</p>
+<ul>
+<li>符号引用是字符串信息, 描述所引用的目标.</li>
+<li>直接引用, 在运行时, 符号引用会替换为指针, 该指针指向一个函数, 或者一个类,</li>
+</ul>
+<blockquote>
+<p>也可先执行<code>clinit</code>方法, 再执行解析. 防止循环引用</p>
+</blockquote>
+</li>
+<li>
+<p>初始化</p>
+<p>执行类<code>构造器方法&lt;clinit&gt;</code></p>
+<blockquote>
+<p><code>&lt;clinit&gt;</code>由JVM自动生成</p>
+<p>自动收集类中的所有类的<mark>静态变量的赋值动作</mark>与<mark>静态代码块的语句</mark>合并生成.</p>
+<p>按照语句在源文件出现顺序执行</p>
+</blockquote>
+<p>必须先执行父类的<code>&lt;clinit&gt;</code>函数, 且<code>&lt;clinit&gt;</code>函数在多线程情况下会加锁.</p>
+<blockquote>
+<p>防止一个类被多次加载.</p>
+</blockquote>
+</li>
+</ul>
+<p>​	<mark>一个类只会加载一次</mark>并会将信息放到方法区,  意味着<code>&lt;clinit&gt;</code>只会调用一次,</p>
+<p>​	实例化会从方法区中读取类信息, 一个类若没有static, 那么不会有<code>&lt;clinit&gt;</code>方法</p>
+<blockquote>
+<p>函数中类的构造函数对应虚拟机中 <code>&lt;init&gt;</code>方法</p>
+</blockquote>
+<h2 id="双亲委派机制"><a class="markdownIt-Anchor" href="#双亲委派机制"></a> 双亲委派机制</h2>
+<p>class文件是按需加载的, 而加载一个class文件时, 会先询问上级<code>加载器</code>是否能完成加载.</p>
+<img src="https://github.com/chenyuanzhen/chenyuanzhen.github.io/blob/image/image/2022-04-13_10:11:43-image-20220308112126606.png?raw=true" alt="image-20220308112126606" style="zoom:50%;" />
+<p>如我在项目路径中, 自定义一个java.lang.String类, 那么在加载我自定义的String类时, 由于<code>双亲委派机制</code>,</p>
+<ol>
+<li>从<code>系统类加载器</code>出发, 询问<code>拓展类加载器</code>能否完成加载</li>
+<li><code>拓展类</code>询问<code>引导类</code>能否加载</li>
+<li>由于<code>引导类</code>是负责加载 java.lang下的类, 所以由引导类加载器加载java.lang.String. 但此时该java.lang.String是Java原String, 并非项目路径下的String. 因为<mark>引导类加载器搜索范围是 java目录下, 而非项目目录</mark>. 所以项目中仍是使用java核心API的String</li>
+<li>引导类加载器已经完成加载, 其余加载器就无需干活.</li>
+</ol>
+<h4 id="目的"><a class="markdownIt-Anchor" href="#目的"></a> 目的</h4>
+<p>出于安全考虑, 防止外部引入与核心API同名的类导致Java项目出错</p>
+<blockquote>
+<p>保证JDK的系统API不会被用户定义的类加载器所破坏</p>
+</blockquote>
+<h2 id="对象创建实例化过程"><a class="markdownIt-Anchor" href="#对象创建实例化过程"></a> 对象创建(实例化)过程</h2>
+<img src="https://github.com/chenyuanzhen/chenyuanzhen.github.io/blob/image/image/2022-04-13_10:11:43-image-20220313214347949.png?raw=true" alt="image-20220313214347949" style="zoom:33%;" />
+<ol>
+<li>
+<p>类加载检查</p>
+<p>检查类是否已经加载到方法区, 若未加载, 则先执行类加载</p>
+</li>
+<li>
+<p>分配内存</p>
+<p>将新生代划分空间, 写好类信息头后, 并将给各变量其赋予零值.</p>
+<blockquote>
+<p>内存分配并发问题.  同时有多个线程分配内存</p>
+<ul>
+<li>CAS操作</li>
+<li>每个线程在Eden区独享一块内存,称为<code>TLAB</code>, 所用内存超过则用CAS操作赋值.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>设置对象头</p>
+<p>存储:</p>
+<ul>
+<li>如何找到类的元数据</li>
+<li>对象哈希码</li>
+<li>对象的GC分代年龄</li>
+<li>等等</li>
+</ul>
+</li>
+<li>
+<p>执行<code>&lt;init&gt;</code>方法</p>
+<p>执行构造函数, 完成各变量的赋值, 执行顺序如下</p>
+<ol>
+<li>先执行父类的构造函数</li>
+<li>执行构造函数外的赋值语句</li>
+<li>执行自己的构造函数.</li>
+</ol>
+</li>
+</ol>
+<h2 id="jvm内存分配与回收"><a class="markdownIt-Anchor" href="#jvm内存分配与回收"></a> JVM内存分配与回收</h2>
+<p>Java堆 又称<code>GC</code></p>
+<h4 id="分代垃圾收集算法"><a class="markdownIt-Anchor" href="#分代垃圾收集算法"></a> 分代垃圾收集算法</h4>
+<p>堆分为: 新生代, 老生代.</p>
+<blockquote>
+<p>经过多次GC还能活着, 可以认为该对象在以后也要活着, 那么应放到Old Memory中. 那么在执行GC时, JVM只需要扫描被回收概率大的对象, 即刚被分配的对象.</p>
+</blockquote>
+<img src="https://github.com/chenyuanzhen/chenyuanzhen.github.io/blob/image/image/2022-04-13_10:11:43-image-20220305085154066.png?raw=true" alt="image-20220305085154066" style="zoom:50%;" />
+<p>过程:</p>
+<ul>
+<li>
+<p>对象分配在Eden, 经过一次Eden垃圾回收后, 会进入 Survivor0或 Survivor1.</p>
+</li>
+<li>
+<p>此外每经过一次垃圾回收, 年龄 + 1. 当年龄大于一定程度时, 会放置到Old Memory变为老生代.</p>
+</li>
+<li>
+<p>经过一次GC后, Eden区和From区会被清空, From会和To交换角色.</p>
+</li>
+<li>
+<p>当Eden区没有足够空间分配, 会触发MinorGC, 会通过<code>分配担保机制</code>将新生代对象提起放到老年代</p>
+</li>
+</ul>
+<h4 id="规则"><a class="markdownIt-Anchor" href="#规则"></a> 规则</h4>
+<ul>
+<li>
+<p>大对象直接进入老年代</p>
+<blockquote>
+<p>避免大对象分配内存由于<code>分配担保机制</code>带来复制而降低效率</p>
+</blockquote>
+</li>
+<li>
+<p>长期存活的对象会进入老年代</p>
+</li>
+</ul>
+<h4 id="gc名词解释"><a class="markdownIt-Anchor" href="#gc名词解释"></a> GC名词解释</h4>
+<ul>
+<li>新生代收集 MinorGC / YoungGC 仅对新生代区域进行垃圾收集</li>
+<li>老年代收集 MajorGC / OldGC 仅对老年代进行垃圾收集</li>
+<li>混合收集 MixedGC 对整个新生代和部分老年代进行垃圾收集</li>
+</ul>
+<p>整堆收集 Full GC 收集整个Java堆和方法区</p>
+<h4 id="空间分配担保"><a class="markdownIt-Anchor" href="#空间分配担保"></a> 空间分配担保</h4>
+<p>确保在MinorGC之前老年代本身还有容纳新生代所有对象的剩余空间.</p>
+<h2 id="确定一个对象真的要挂了"><a class="markdownIt-Anchor" href="#确定一个对象真的要挂了"></a> 确定一个对象真的要挂了?</h2>
+<h4 id="方法一-引用计数法"><a class="markdownIt-Anchor" href="#方法一-引用计数法"></a> 方法一 引用计数法</h4>
+<p>与C<ins>的shared_ptr类似, 一块对象每被引用一次, 则引用计数器</ins>. 解除则引用计数器–.</p>
+<p>当引用计数器为0时, 则回收</p>
+<blockquote>
+<p>但也存在和shared_ptr一样的问题, <mark>循环引用</mark>.</p>
+<p>即两个对象彼此互相指着, 但除此之外, 无其他引用.</p>
+<p>C++是采用weak_ptr解决</p>
+</blockquote>
+<h4 id="方法二-可达性分析"><a class="markdownIt-Anchor" href="#方法二-可达性分析"></a> 方法二 可达性分析</h4>
+<p>从<code>GC Root</code>的对象作为起点出发, <code>GC Root</code>无法访问到的对象, 说明该对象已经不可用.</p>
+<p><code>GC Root</code>可以是</p>
+<ul>
+<li>
+<p><mark>所有正在运行的线程的本地栈上的引用变量</mark></p>
+</li>
+<li>
+<p><strong>JVM内部使用的引用</strong></p>
+</li>
+<li>
+<p>⽅法区中的静态变量</p>
+</li>
+<li>
+<p>本地方法栈中JNI（即一般说的Native方法）引用的对象</p>
+</li>
+</ul>
+<h2 id="强-软-弱-虚引用"><a class="markdownIt-Anchor" href="#强-软-弱-虚引用"></a> 强 / 软 / 弱 / 虚引用</h2>
+<p>软/ 弱 / 虚引用 为一个特定类,</p>
+<ul>
+<li>
+<p>强引用</p>
+<p>平时使用的引用</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 强引用, 该引用指向的对象, JVM不会回收</span></span><br><span class="line">Person person = <span class="keyword">new</span> Person();</span><br></pre></td></tr></table></figure>
+<p>哪怕内存满, 只会报OOM错误</p>
+</li>
+<li>
+<p>软引用</p>
+<p>内存足够, 不回收该引用</p>
+<p>内存不足, 会回收该对象</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object o1 = <span class="keyword">new</span> Object();</span><br><span class="line">SoftReference&lt;Object&gt; softReference = <span class="keyword">new</span> SoftReference(o1);</span><br><span class="line">o1 = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>弱引用</p>
+<p>不管内存是否足够, GC时会进行回收</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object o1 = <span class="keyword">new</span> Object;</span><br><span class="line">WeakPeference&lt;Object&gt; weakReference = <span class="keyword">new</span> WeakReference(o1);</span><br><span class="line">o1 = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>虚引用</p>
+<p><code>PhantomReference</code>类实现, 等同于没有任何引用, 仅用于调用<code>finalize()</code>方法,</p>
+<p>需配合引用队列一起使用</p>
+</li>
+</ul>
+<h2 id="回收类信息"><a class="markdownIt-Anchor" href="#回收类信息"></a> 回收类信息</h2>
+<p>当一个类满足以下<mark>所有条件</mark>, 才<mark>可能</mark>会被回收, 下次使用需重新加载</p>
+<ul>
+<li>Java堆中不存在该类的实例</li>
+<li>ClassLoader已经被回收</li>
+<li>对应的反射Class没有被使用</li>
+</ul>
+<h2 id="垃圾收集算法"><a class="markdownIt-Anchor" href="#垃圾收集算法"></a> 垃圾收集算法</h2>
+<h3 id="标记-清除算法"><a class="markdownIt-Anchor" href="#标记-清除算法"></a> 标记-清除算法</h3>
+<p>将待清除的对象打上标记, 待会统一进行清除</p>
+<p>优点</p>
+<ul>
+<li>效率高</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>产生许多内存碎片</li>
+</ul>
+<h3 id="复制算法"><a class="markdownIt-Anchor" href="#复制算法"></a> 复制算法</h3>
+<p>将内存分为两个大小相同的块, 将要保留的对象放到另一边. 清除时, 只需要将当前使用的内存全部清空即可</p>
+<p>优点</p>
+<ul>
+<li>产生较少内存碎片</li>
+</ul>
+<p>缺点</p>
+<ul>
+<li>需要拷贝</li>
+</ul>
+<h3 id="标记-整理算法"><a class="markdownIt-Anchor" href="#标记-整理算法"></a> 标记-整理算法</h3>
+<p>依然是将要回收的对象打上标记, 在清除时, <mark>将所有存活对象向一端移动</mark>. 最后清除边界以外的内存</p>
+<img src="https://github.com/chenyuanzhen/chenyuanzhen.github.io/blob/image/image/2022-04-13_10:11:43-image-20220306220007575.png?raw=true" alt="image-20220306220007575" style="zoom: 33%;" />
+<h3 id="分代收集算法"><a class="markdownIt-Anchor" href="#分代收集算法"></a> 分代收集算法</h3>
+<p>JVM根据对象存活周期, 区分新生代, 老年代. 并根据其特点采用不同的垃圾回收算法</p>
+<ul>
+<li>
+<p>新生代中, 采用复制算法</p>
+<blockquote>
+<p>新生代中, 对象淘汰的概率最大, 往往只要少量的复制成本完成</p>
+</blockquote>
+</li>
+<li>
+<p>老年代, 采用标记整理算法</p>
+<blockquote>
+<p>老年代, 对象淘汰概率小, 且需要减少内存碎片, 以便老年代存放更多对象</p>
+</blockquote>
+</li>
+</ul>
+</div><!-- comment system--><div class="container"><hr></div></article><footer id="footer"><div class="container"><div class="bar"><div class="social"><a href="mailto:874579938@qq.com" target="_blank"><i class="fa fa-envelope-o"></i></a></div><div class="footer">© 2022 <a href="/" rel="nofollow">镇远</a>. Powered by <a rel="nofollow" target="_blank" href="https://hexo.io">Hexo</a>. Theme <a target="_blank" href="https://github.com/lotabout/very-simple">very-simple</a>.</div></div></div></footer><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.css"><script src="//cdn.bootcss.com/jquery/2.0.3/jquery.min.js"></script><script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script>$(document).ready(function() {
+    $(".fancybox").fancybox();
+});
+</script></body></html>
